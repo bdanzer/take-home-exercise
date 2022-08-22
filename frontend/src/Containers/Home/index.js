@@ -12,6 +12,7 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import * as actions from "../../actions"
+import Recipe from "../Recipe"
 
 const ingredientList = ["flour", "sugar", "salt", "butter", "milk"]
 
@@ -26,14 +27,14 @@ class Home extends Component {
       ingredients: ["milk"],
     }
   }
-  fetchSearch() {
+  fetchSearch = () => {
     // TODO: something is missing here for fetching
   }
-  handleSearch(event) {
+  handleSearch = (event) => {
     const term = event.target.value
     this.setState({ term })
   }
-  handleIngredient(ingredient, event) {
+  handleIngredient = (ingredient, event) => {
     const { ingredients } = { ...this.state }
     if (event.target.checked) {
       ingredients.push(ingredient)
@@ -62,7 +63,7 @@ class Home extends Component {
               control={
                 <Checkbox
                   checked={ingredients.includes(ingredient)}
-                  onChange={this.handleIngredient.bind(this, ingredient)}
+                  onChange={this.handleIngredient(ingredient)}
                   value={ingredient}
                 />
               }
@@ -88,6 +89,7 @@ class Home extends Component {
           I'm expecting you to have it return null or a component based on the redux state, not passing any props from here
           I want to see how you wire up a component with connect and build actions.
         */}
+        <Recipe />
       </HomeWrapper>
     )
   }
