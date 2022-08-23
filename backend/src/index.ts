@@ -12,7 +12,7 @@ const appStartup = async (): Promise<void> => {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(async (res, req, next) => {
-    await new Promise((resolve) => setTimeout(() => resolve(0), 1000)) //adding a set timeout to show loading states better for now
+    await new Promise((resolve) => setTimeout(() => resolve(0), 1000)) //adding a set timeout to show loading states on the UI better for now
     next()
   })
   // create our routes
