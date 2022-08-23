@@ -11,6 +11,10 @@ const appStartup = async (): Promise<void> => {
   // add parsers for the body
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(async (res, req, next) => {
+    await new Promise((resolve) => setTimeout(() => resolve(0), 1000)) //adding a set timeout to show loading states better for now
+    next()
+  })
   // create our routes
   app.post("/api/search", searchMiddleware)
   app.get("/api/recipe/:id", recipeMiddleware)

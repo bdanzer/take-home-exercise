@@ -10,10 +10,12 @@ import Alert from "./alert"
 function Recipes() {
   const recipes = useSelector((s) => s.search.recipes)
   const loading = useSelector((s) => s.search.isLoading)
+  const error = useSelector((s) => s.search.error)
   const navigate = useNavigate()
 
-  if (!recipes) return null
+  if (error) return <Alert severity="error" label={error.message} />
   if (loading) return <LinearProgress />
+  if (!recipes) return null
   if (recipes?.length === 0)
     return (
       <Alert
@@ -24,14 +26,10 @@ function Recipes() {
 
   return (
     <Paper elevation={3}>
-      {recipes.map((recipe) => (
+      {recipes?.map((recipe) => (
         <MenuItem
           key={recipe.id}
-          onClick={() =>
-            navigate(`/recipe/${recipe.id}`, {
-              state: recipe,
-            })
-          }
+          onClick={() => navigate(`/recipe/${recipe.id}`)}
         >
           {recipe.name}
         </MenuItem>

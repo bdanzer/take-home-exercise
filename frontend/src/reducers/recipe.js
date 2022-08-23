@@ -15,7 +15,7 @@ const searchFetching = (state) => {
 }
 
 const searchFetched = (state, payload) => {
-  return { ...state, isLoading: false, recipes: payload }
+  return { ...state, isLoading: false, data: payload }
 }
 
 const searchFailed = (state, payload) => {
