@@ -1,4 +1,3 @@
-import "source-map-support/register"
 import { connectDb } from "./db"
 import serverlessExpress from "@vendia/serverless-express"
 import { app } from "."
