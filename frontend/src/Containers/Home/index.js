@@ -29,15 +29,14 @@ class Home extends Component {
     const term = event.target.value
     this.setState({ term })
   }
-  handleIngredient = (ingredient, event) => {
-    const { ingredients } = { ...this.state }
-    if (event.target.checked) {
-      ingredients.push(ingredient)
-    } else {
-      const foundIngredient = ingredients.indexOf(ingredient)
-      ingredients.splice(foundIngredient, 1)
-    }
-    this.setState({ ingredients })
+  handleIngredient = (chosenIngredient, event) => {
+    this.setState((prevState) => ({
+      ingredients: event.target.checked
+        ? [...prevState.ingredients, chosenIngredient]
+        : prevState.ingredients.filter(
+            (prevIngredient) => prevIngredient !== chosenIngredient
+          ),
+    }))
   }
   render() {
     const { term, ingredients } = this.state
