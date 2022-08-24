@@ -1,6 +1,5 @@
 import "dotenv/config"
 import express from "express"
-// import express from "serverless-express/express"
 import bodyParser from "body-parser"
 import { searchMiddleware, recipeMiddleware } from "./routes"
 import cors from "cors"
