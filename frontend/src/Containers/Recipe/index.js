@@ -25,39 +25,37 @@ function Recipe() {
   }, [recipeId])
 
   return (
-    <>
-      <RecipeWrapper>
-        {error && <Alert severity="error" label={error.message} />}
-        <Button
-          onClick={() => navigate("/")}
-          variant="contained"
-          color="primary"
-        >
-          Go Back To Home
-        </Button>
-        <Typography variant="h4" style={{ margin: "12px 0" }}>
-          {loading ? <SimpleSkeleton height="40px" /> : recipe?.name}
-        </Typography>
-        <Paper style={{ padding: 16 }} elevation={4}>
-          <Typography variant="h6">Ingredients</Typography>
-          {loading ? (
-            <SimpleSkeleton height="100px" />
-          ) : (
-            recipe?.ingredients?.map((ingredient) => (
-              <Typography component="li" key={ingredient._id}>
-                {ingredient.amount} {ingredient.unit} - {ingredient.name}
-              </Typography>
-            ))
-          )}
-          <Typography variant="h6">Instructions</Typography>
-          {loading ? (
-            <SimpleSkeleton height="200px" />
-          ) : (
-            <Typography variant="body1">{recipe?.instructions}</Typography>
-          )}
-        </Paper>
-      </RecipeWrapper>
-    </>
+    <RecipeWrapper>
+      {error && <Alert severity="error" label={error.message} />}
+      <Button
+        onClick={() => navigate("/")}
+        variant="contained"
+        color="primary"
+      >
+        Go Back To Home
+      </Button>
+      <Typography variant="h4" style={{ margin: "12px 0" }}>
+        {loading ? <SimpleSkeleton height="40px" /> : recipe?.name}
+      </Typography>
+      <Paper style={{ padding: 16 }} elevation={4}>
+        <Typography variant="h6">Ingredients</Typography>
+        {loading ? (
+          <SimpleSkeleton height="100px" />
+        ) : (
+          recipe?.ingredients?.map((ingredient) => (
+            <Typography component="li" key={ingredient._id}>
+              {ingredient.amount} {ingredient.unit} - {ingredient.name}
+            </Typography>
+          ))
+        )}
+        <Typography variant="h6">Instructions</Typography>
+        {loading ? (
+          <SimpleSkeleton height="200px" />
+        ) : (
+          <Typography variant="body1">{recipe?.instructions}</Typography>
+        )}
+      </Paper>
+    </RecipeWrapper>
   )
 }
 
