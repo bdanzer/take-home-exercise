@@ -17,11 +17,9 @@ const recipeCleaner = (
 ): {
   id: string
   name: string
-  ingredients: Ingredient[]
-  instructions: string
 } => {
-  const { id, name, ingredients, instructions } = recipe
-  return { id, name, ingredients, instructions }
+  const { id, name } = recipe
+  return { id, name }
 }
 
 export const searchMiddleware = async (
