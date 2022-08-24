@@ -1,0 +1,1 @@
+export const baseUrl = `${process.NODE_ENV === 'production' ? 'https://r7rb29h3d0.execute-api.us-east-1.amazonaws.com/' : 'http://localhost:4000/'}`

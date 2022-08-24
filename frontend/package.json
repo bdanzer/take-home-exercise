@@ -7,8 +7,8 @@
   "author": "zeal",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack",
+    "start": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=production webpack",
     "lint": "eslint src/ --ext .js,.jsx",
     "dev-be": "node --inspect -r ts-node/register server/index.ts",
     "dev-be-brk": "node --inspect-brk -r ts-node/register server/index.ts"
@@ -20,6 +20,7 @@
     "react-hot-loader": "4.12.20",
     "react-is": "16.13.1",
     "react-redux": "7.2.0",
+    "react-router-dom": "^6.3.0",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "styled-components": "5.0.1"

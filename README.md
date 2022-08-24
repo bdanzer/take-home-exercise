@@ -40,3 +40,16 @@ head to the `RUN` tab (the play button w/ a bug) and select `debug` and hit play
 1. containerize the application
 1. add deployments using heroku, digital ocean, etc...
 1. add integration tests using puppeteer, webdriver, playwright, etc...
+
+## Backend ENV
+
+Added a .env in the backend for database passwords. The .env would need to be created server side to ensure password is kept secure
+
+## Database
+
+Database is connected to a mongo atlas cloud server.
+
+## Hosting
+
+- Front end site is hosted on amplify on amazon
+- Backend site is managed with aws serverless

@@ -1,0 +1,31 @@
+service: take-home
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  timeout: 15
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    disableCookieValidation: true
+
+functions:
+  serverlessExpressHandler:
+    handler: src/handler.serverlessExpressHandler
+    events:
+      - http:
+          path: api/recipe/{recipeId}
+          method: get
+          cors:
+            origin: "https://feature-search.d3trv6vvetvuxy.amplifyapp.com,http://localhost:3000"
+      - http:
+          path: api/search
+          method: post
+          cors:
+            origin: "https://feature-search.d3trv6vvetvuxy.amplifyapp.com,http://localhost:3000"

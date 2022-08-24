@@ -2,67 +2,74 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { HomeWrapper } from "./styles"
-import Input from "@material-ui/core/Input"
+import TextField from "@material-ui/core/TextField"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Divider from "@material-ui/core/Divider"
 import Button from "@material-ui/core/Button"
-import LinearProgress from "@material-ui/core/LinearProgress"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
+import Typography from "@material-ui/core/Typography"
 import * as actions from "../../actions"
+import Recipes from "../../components/recipes"
+import Alert from "../../components/alert"
 
 const ingredientList = ["flour", "sugar", "salt", "butter", "milk"]
 
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.handleSearch = this.handleSearch.bind(this)
-    this.handleIngredient = this.handleIngredient.bind(this)
-    this.fetchSearch = this.fetchSearch.bind(this)
     this.state = {
       term: "",
-      ingredients: ["milk"],
+      ingredients: [],
     }
   }
-  fetchSearch() {
-    // TODO: something is missing here for fetching
+  fetchSearch = () => {
+    this.props.searchRecipes(this.state.term, this.state.ingredients)
   }
-  handleSearch(event) {
+  handleSearch = (event) => {
     const term = event.target.value
     this.setState({ term })
   }
-  handleIngredient(ingredient, event) {
-    const { ingredients } = { ...this.state }
-    if (event.target.checked) {
-      ingredients.push(ingredient)
-    } else {
-      const foundIngredient = ingredients.indexOf(ingredient)
-      ingredients.splice(foundIngredient, 1)
-    }
-    this.setState({ ingredients })
+  handleIngredient = (chosenIngredient, event) => {
+    this.setState((prevState) => ({
+      ingredients: event.target.checked
+        ? [...prevState.ingredients, chosenIngredient]
+        : prevState.ingredients.filter(
+            (prevIngredient) => prevIngredient !== chosenIngredient
+          ),
+    }))
   }
   render() {
     const { term, ingredients } = this.state
-    const { recipes, isLoading } = this.props
+    const haveNoIngredients = ingredients.length === 0
     return (
       <HomeWrapper>
-        <Input
+        <TextField
           autoFocus={true}
           fullWidth={true}
           onChange={this.handleSearch}
           value={term}
+          label="Search"
+          placeholder="Search for Recipe Names"
+          variant="filled"
         />
+
         <div>
-          <h3>Ingredients on hand</h3>
+          <Typography variant="h6" style={{ marginTop: 12, marginBottom: 0 }}>
+            Ingredients on hand
+          </Typography>
+          {haveNoIngredients && (
+            <Alert
+              severity={"error"}
+              label="Must have an ingredient to search"
+            />
+          )}
           {ingredientList.map((ingredient) => (
             <FormControlLabel
               key={ingredient}
               control={
                 <Checkbox
                   checked={ingredients.includes(ingredient)}
-                  onChange={this.handleIngredient.bind(this, ingredient)}
+                  onChange={(e) => this.handleIngredient(ingredient, e)}
                   value={ingredient}
                 />
               }
@@ -70,24 +77,16 @@ class Home extends Component {
             />
           ))}
         </div>
-        <Button onClick={this.fetchSearch}>search</Button>
-        <Divider />
-        {recipes && (
-          <List>
-            {recipes.map((recipe) => (
-              <ListItem key={recipe.id}>
-                <ListItemText primary={recipe.name} />
-              </ListItem>
-            ))}
-          </List>
-        )}
-        {isLoading && <LinearProgress />}
-        <Divider />
-        {/*
-          TODO: Add a recipe component here.
-          I'm expecting you to have it return null or a component based on the redux state, not passing any props from here
-          I want to see how you wire up a component with connect and build actions.
-        */}
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={haveNoIngredients}
+          onClick={this.fetchSearch}
+        >
+          search
+        </Button>
+        <Divider style={{ marginTop: 12, marginBottom: 12 }} />
+        <Recipes />
       </HomeWrapper>
     )
   }

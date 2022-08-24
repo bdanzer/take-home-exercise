@@ -12,7 +12,12 @@ interface Query {
   ingredients?: Ingredient[]
 }
 
-const recipeCleaner = (recipe): { id: string; name: string } => {
+const recipeCleaner = (
+  recipe
+): {
+  id: string
+  name: string
+} => {
   const { id, name } = recipe
   return { id, name }
 }
@@ -26,10 +31,12 @@ export const searchMiddleware = async (
   if (name) {
     query.name = new RegExp(escapeRegex(name), "gi")
   }
+  
   if (ingredients) {
-    const whatsLeft = allIngredients.filter((ing) => !ingredients.includes(ing))
-    query["ingredients.name"] = { $nin: whatsLeft }
+    const whatsLeft = allIngredients.filter((ing) => ingredients.includes(ing))
+    query["$and"] =  whatsLeft.map(ingredient => ({"ingredients.name": { $in: [ingredient] }}))
   }
+
   const foundRecipes = await RecipeModel.find(query)
   const builtRecipes = foundRecipes.map(recipeCleaner)
   res.send(builtRecipes)
