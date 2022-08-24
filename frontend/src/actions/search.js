@@ -17,7 +17,7 @@ const failedSearch = (payload) => ({
 })
 
 export const executeSearch = async (name, ingredients) => {
-  const response = await fetch("http://localhost:4000/dev/api/search", {
+  const response = await fetch("https://r7rb29h3d0.execute-api.us-east-1.amazonaws.com/dev/api/search", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
