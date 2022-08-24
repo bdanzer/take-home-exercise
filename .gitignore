@@ -4,6 +4,7 @@ dist
 *.DS_Store
 .env
 .build
+.serverless
 
 # yarn 3 stuff
 
