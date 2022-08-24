@@ -26,6 +26,7 @@ module.exports = {
   output: {
     path: buildDir,
     filename: "[name].bundle.js",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -45,12 +46,7 @@ module.exports = {
     contentBase: staticDir,
     publicPath: "/",
     filename: "[name].bundle.js",
-    proxy: {
-      "/api/**": {
-        target: "http://localhost:4000/",
-        changeOrigin: true,
-      },
-    },
+    historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000,

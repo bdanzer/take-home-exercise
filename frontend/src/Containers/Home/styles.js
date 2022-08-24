@@ -7,4 +7,5 @@ export const HomeWrapper = styled.div`
   flex-flow: column;
   margin: auto;
   padding: 8px;
+  padding-bottom: 20px;
 `
