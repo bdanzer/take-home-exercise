@@ -48,3 +48,8 @@ Added a .env in the backend for database passwords. The .env would need to be cr
 ## Database
 
 Database is connected to a mongo atlas cloud server.
+
+## Hosting
+
+- Front end site is hosted on amplify on amazon
+- Backend site is managed with aws serverless
