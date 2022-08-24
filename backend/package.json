@@ -9,15 +9,17 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src/ --ext .ts",
-    "start": "nodemon -e ts --exec yarn dev-be",
+    "start": "serverless offline --disableCookieValidation",
     "dev-be": "node -r esbuild-register --inspect=0.0.0.0:9229 src/index.ts"
   },
   "dependencies": {
     "body-parser": "1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "4.17.1",
     "lodash": "4.17.15",
-    "mongoose": "5.12.7"
+    "mongoose": "5.12.7",
+    "serverless-express": "^2.0.12"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
@@ -29,6 +31,7 @@
     "@types/node": "14.17.15",
     "@typescript-eslint/eslint-plugin": "2.24.0",
     "@typescript-eslint/parser": "2.24.0",
+    "@vendia/serverless-express": "^4.10.1",
     "babel-eslint": "10.1.0",
     "esbuild": "0.12.18",
     "esbuild-register": "2.6.0",
@@ -36,6 +39,10 @@
     "lorem-ipsum": "2.0.3",
     "mongodb-memory-server": "6.3.3",
     "nodemon": "2.0.7",
-    "typescript": "4.2.4"
+    "serverless": "^3.22.0",
+    "serverless-dotenv-plugin": "^4.0.2",
+    "serverless-offline": "^9.2.6",
+    "serverless-plugin-typescript": "^2.1.2",
+    "typescript": "^4.7.4"
   }
 }

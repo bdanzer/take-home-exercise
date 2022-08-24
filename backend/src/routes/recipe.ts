@@ -8,13 +8,13 @@ export const recipeMiddleware = async (
 ): Promise<void> => {
   const recipeId = req.params.id
 
-  if (!recipeId) return res.send(404)
+  if (!recipeId) res.status(404).send()
 
   const foundRecipes = await RecipeModel.findById(recipeId)
 
   if (foundRecipes) {
-    res.send(foundRecipes)
+    res.status(200).send(foundRecipes)
   } else {
-    res.send(404)
+    res.status(404).send()
   }
 }

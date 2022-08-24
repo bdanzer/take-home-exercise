@@ -3,6 +3,7 @@ dist
 *.log
 *.DS_Store
 .env
+.build
 
 # yarn 3 stuff
 

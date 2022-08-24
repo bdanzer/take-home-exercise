@@ -47,12 +47,6 @@ module.exports = {
     publicPath: "/",
     filename: "[name].bundle.js",
     historyApiFallback: true,
-    proxy: {
-      "/api/**": {
-        target: "http://localhost:4000/",
-        changeOrigin: true,
-      },
-    },
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000,

@@ -1,28 +1,33 @@
 import "dotenv/config"
 import express from "express"
+// import express from "serverless-express/express"
 import bodyParser from "body-parser"
-import http from "http"
-import { connectDb } from "./db"
 import { searchMiddleware, recipeMiddleware } from "./routes"
+import cors from "cors"
 
-const appStartup = async (): Promise<void> => {
-  await connectDb()
-  const app = express()
-  // add parsers for the body
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: false }))
-  app.use(async (res, req, next) => {
-    await new Promise((resolve) => setTimeout(() => resolve(0), 1000)) //adding a set timeout to show loading states on the UI better for now
-    next()
-  })
-  // create our routes
-  app.post("/api/search", searchMiddleware)
-  app.get("/api/recipe/:id", recipeMiddleware)
-  // create a server
-  const httpServer = new http.Server(app)
-  httpServer.listen(4000, "0.0.0.0", () => {
-    console.log("now running on 4000")
-  })
-}
+export const app = express()
+// add parsers for the body
 
-appStartup()
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://feature-search.d3trv6vvetvuxy.amplifyapp.com",
+    ],
+  })
+)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(async (res, req, next) => {
+  await new Promise((resolve) => setTimeout(() => resolve(0), 1000)) //adding a set timeout to show loading states on the UI better for now
+  next()
+})
+// create our routes
+app.get("/api/recipe/:id", recipeMiddleware)
+app.post("/api/search", searchMiddleware)
+
+// Handle in-valid route
+app.all("*", function (req, res) {
+  const response = { data: null, message: "Route not found!!" }
+  res.status(400).send(response)
+})

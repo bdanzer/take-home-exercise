@@ -17,7 +17,7 @@ const failedSearch = (payload) => ({
 })
 
 export const executeSearchByRecipeId = async (recipeId) => {
-  const response = await fetch(`/api/recipe/${recipeId}`, {
+  const response = await fetch(`http://localhost:4000/dev/api/recipe/${recipeId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
