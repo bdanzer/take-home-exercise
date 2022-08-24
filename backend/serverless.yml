@@ -23,9 +23,9 @@ functions:
           path: api/recipe/{recipeId}
           method: get
           cors:
-            origin: "https://feature-search.d3trv6vvetvuxy.amplifyapp.com"
+            origin: "https://feature-search.d3trv6vvetvuxy.amplifyapp.com,http://localhost:3000"
       - http:
           path: api/search
           method: post
           cors:
-            origin: "https://feature-search.d3trv6vvetvuxy.amplifyapp.com"
+            origin: "https://feature-search.d3trv6vvetvuxy.amplifyapp.com,http://localhost:3000"
