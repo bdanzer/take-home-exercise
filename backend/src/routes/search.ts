@@ -31,12 +31,12 @@ export const searchMiddleware = async (
   if (name) {
     query.name = new RegExp(escapeRegex(name), "gi")
   }
+  
   if (ingredients) {
     const whatsLeft = allIngredients.filter((ing) => ingredients.includes(ing))
     query["$and"] =  whatsLeft.map(ingredient => ({"ingredients.name": { $in: [ingredient] }}))
   }
 
-  console.log('query', JSON.stringify(query))
   const foundRecipes = await RecipeModel.find(query)
   const builtRecipes = foundRecipes.map(recipeCleaner)
   res.send(builtRecipes)
