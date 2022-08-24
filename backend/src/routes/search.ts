@@ -35,7 +35,7 @@ export const searchMiddleware = async (
   }
   if (ingredients) {
     const whatsLeft = allIngredients.filter((ing) => ingredients.includes(ing))
-    query["ingredients.name"] = { $in: whatsLeft }
+    query["ingredients.name"] = {$and: whatsLeft.map(ingredient => ({ $in: ingredient }))}
   }
   const foundRecipes = await RecipeModel.find(query)
   const builtRecipes = foundRecipes.map(recipeCleaner)
