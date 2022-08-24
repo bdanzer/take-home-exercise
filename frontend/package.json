@@ -7,8 +7,8 @@
   "author": "zeal",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack",
+    "start": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=production webpack",
     "lint": "eslint src/ --ext .js,.jsx",
     "dev-be": "node --inspect -r ts-node/register server/index.ts",
     "dev-be-brk": "node --inspect-brk -r ts-node/register server/index.ts"

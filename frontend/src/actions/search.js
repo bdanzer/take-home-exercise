@@ -1,3 +1,5 @@
+import { baseUrl } from "../utils/baseUrl"
+
 export const GET_SEARCH = "GET_SEARCH"
 export const RECEIVE_SEARCH = "RECEIVE_SEARCH"
 export const FAIL_SEARCH = "FAIL_SEARCH"
@@ -17,7 +19,7 @@ const failedSearch = (payload) => ({
 })
 
 export const executeSearch = async (name, ingredients) => {
-  const response = await fetch("https://r7rb29h3d0.execute-api.us-east-1.amazonaws.com/dev/api/search", {
+  const response = await fetch(`${baseUrl}dev/api/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
